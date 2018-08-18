@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home - Mikdan Food Delivery</title>
+	<link rel="stylesheet" href="my_style.css">
+	
+	<script type="text/javascript">
+		function pageCheck() {
+			if (document.cookie != "admin") {
+				//logout();
+			}else{
+				var con = new ActiveXObject("ADODB.Connection");
+				var rs = new ActiveXObject("ADODB.Recordset");
+				con.Open("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=S:\\food.accdb");
+				var query = "select * from foods";
+				rs.open(query, con, 1, 3);
+				var dataHTML = "";
+				if(!rs.bof){
+					rs.MoveFirst();
+				}
+				if (rs.RecordCount > 0) {
+				
+				dataHTML += '<table id="foods">';
+				dataHTML += '<tr><th>Name</th><th>Image</th><th>Price</th><th>Description</th><th>Action</th></tr>';
+				dataHTML += '<tr>';
+				dataHTML += '<td>Biyani</td>';
+				dataHTML += '<td width="150"><img src="briyani.jpg" width="150px" height="150px"></td>';
+				dataHTML += '<td>200 Rs</td>';
+				dataHTML += '<td>Description</td>';
+				dataHTML += '<td width="200px"><a href="update_food.html?id=1" class="icon_green">Update</a><button onclick="food_delete()" class="icon_red">Delete</button></td>';
+				dataHTML += '</tr>';
+				dataHTML += '</table>';
+				//dataHTML += rs.fields(1);
+				
+				document.getElementById("all_foods").innerHTML = dataHTML;
+				}
+				rs.Close();
+				con.Close();
+			}
+		}
+		function logout() {
+			document.cookie = "";
+			window.location = "admin_login.html";
+		}
+		function add_food(){
+			window.location = "add_food.html";
+		}
+	</script>
+
+</head>
+
+<body onload="pageCheck()">
+<div style="text-align: right">
+Welcome Admin, <button onclick="logout()" class="button_red">Logout</button>
+</div>
+
+<button onclick="add_food()" class="button_green">Add Food</button><br>
+<br>
+
+<div id="all_foods">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login - Mikdan Food Delivery</title>
+	<link rel="stylesheet" href="my_style.css">
+    <script type="text/javascript">
+        function signin() {
+            var t1 = document.users.t1.value;
+            var t2 = document.users.t2.value;
+            if ((t1 != "") && (t2 != "")) {
+				if((t1 == "admin") && (t2 == "admin")){
+					alert("Login Successfully")
+					document.cookie = "admin";
+                    window.location = "admin.html";
+				}else{
+					alert("Login Failure");
+				}
+            } else {
+                alert("Some Filed is missing");
+            }
+        }
+    </script>
+</head>
+<body bgcolor="#37DCD5">
+<center>
+<form name="users">
+<table>
+<tr>
+<td colspan="2" style="text-align: center">
+    <h3>Admin Login Portal</h3>
+</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>
+    <input name="t1" type="text"/></td>
+</tr>
+<tr>
+<td>Password</td>
+<td>
+    <input name="t2" type="password"/></td>
+</tr>
+<tr>
+<td colspan="2" style="text-align: right">
+    <input type="button" class="button_green" value="Login" onclick="signin()" /></td>
+</tr>
+</table>
+</form>
+</center>
+</body>
+</html>

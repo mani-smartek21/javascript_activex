@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Home - Mikdan Food Delivery</title>
+	<link rel="stylesheet" href="my_style.css">
+    <script type="text/javascript">
+        var default_page = document.getElementById("default_page");
+        //alert(default_page)
+    </script>
+</head>
+
+<body onload="pageCheck()">
+<div id="before_login">
+<a href="signin.html">Login</a>
+<a href="signup.html">Signup</a>
+</div>
+
+<div id="after_login">
+<div>
+<div id="user_details"></div>
+<button onclick="logout()">Logout</button>
+</div>
+</div>
+
+<script type="text/javascript">
+    function pageCheck() {
+        var before_login = document.getElementById("before_login");
+        var after_login = document.getElementById("after_login");
+        var user_details = document.getElementById("user_details");
+        //alert(document.cookie);
+
+        if (document.cookie == "") {
+            before_login.style.display = 'block';
+            after_login.style.display = 'none';
+        } else {
+            before_login.style.display = 'none';
+            after_login.style.display = 'block';
+            user_details.innerHTML ="<h3>" + document.cookie + "</h3>";
+        }
+    }
+    function logout() {
+        document.cookie = "";
+        window.location = "signin.html";
+    }
+</script>
+</body>
+</html>

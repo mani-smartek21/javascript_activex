@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Add Food - Mikdan Food Delivery</title>
+	<link rel="stylesheet" href="my_style.css">
+	<script>
+	function add_food() {
+            var t1 = document.food.t1.value;
+            var t2 = document.food.t2.value;
+			var t3 = document.food.t3.value;
+			var t4 = document.food.t4.value;
+            if ((t1 != "") && (t2 != "") && (t3 != "") && (t4 != "")) {
+                var con = new ActiveXObject("ADODB.Connection");
+                var rs = new ActiveXObject("ADODB.Recordset");
+                con.Open("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=S:\\food.accdb");
+                var query = "select * from foods";
+                rs.open(query, con, 1, 3);
+                rs.AddNew();
+                rs.fields(1).value = t1; // Name
+				rs.fields(2).value = t1; // Price
+				rs.fields(3).value = t1; // Image
+				rs.fields(4).value = t1; // Description
+				rs.Update;
+                rs.Close();
+                con.Close();
+				alert("Food Added");
+				 window.location = "all_foods.html";
+            } else {
+                alert("Some Filed is missing");
+            }
+    }
+	</script>
+</head>
+<body bgcolor="#37DCD5">
+<center>
+<form name="food">
+<table>
+<tr>
+<td colspan="2" style="text-align: center">
+    <h3>Add Food</h3>
+</td>
+</tr>
+<tr>
+<td>Name</td>
+<td><input name="t1" type="text" required="required"/></td>
+</tr>
+<tr>
+<td>Price</td>
+<td><input name="t2" type="text" required="required"/></td>
+</tr>
+<tr>
+<td>Image</td>
+<td><input name="t3" type="text" required="required"/></td>
+</tr>
+<tr>
+<td>Description</td>
+<td><textarea required="required" name="t4"></textarea></td>
+</tr>
+<tr>
+<td colspan="2" style="text-align: right">
+    <input type="button" class="button_green" value="Add Food" onclick="add_food()" /></td>
+</tr>
+</table>
+</form>
+</center>
+</body>
+</html>
